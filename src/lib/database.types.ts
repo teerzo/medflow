@@ -9,50 +9,81 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      characters: {
+      forms: {
         Row: {
-          created_at: string
+          created_at: string | null
+          form_type: string | null
           id: string
-          is_deleted: boolean
-          is_private: boolean
-          name: string
-          profession: string
+          patient_given_name: string | null
+          patient_surname: string | null
+          physician_given_name: string | null
+          physician_mobile: string | null
+          physician_surname: string | null
+          updated_at: string | null
         }
         Insert: {
-          created_at?: string
+          created_at?: string | null
+          form_type?: string | null
           id?: string
-          is_deleted?: boolean
-          is_private?: boolean
-          name?: string
-          profession?: string
+          patient_given_name?: string | null
+          patient_surname?: string | null
+          physician_given_name?: string | null
+          physician_mobile?: string | null
+          physician_surname?: string | null
+          updated_at?: string | null
         }
         Update: {
-          created_at?: string
+          created_at?: string | null
+          form_type?: string | null
           id?: string
-          is_deleted?: boolean
-          is_private?: boolean
-          name?: string
-          profession?: string
+          patient_given_name?: string | null
+          patient_surname?: string | null
+          physician_given_name?: string | null
+          physician_mobile?: string | null
+          physician_surname?: string | null
+          updated_at?: string | null
         }
         Relationships: []
       }
-      posts: {
+      profiles: {
         Row: {
-          created_at: string
+          avatar_url: string | null
+          given_name: string | null
           id: string
-          title: string
+          mobile: string | null
+          surname: string | null
+          updated_at: string | null
+          username: string | null
+          website: string | null
         }
         Insert: {
-          created_at?: string
-          id?: string
-          title: string
+          avatar_url?: string | null
+          given_name?: string | null
+          id: string
+          mobile?: string | null
+          surname?: string | null
+          updated_at?: string | null
+          username?: string | null
+          website?: string | null
         }
         Update: {
-          created_at?: string
+          avatar_url?: string | null
+          given_name?: string | null
           id?: string
-          title?: string
+          mobile?: string | null
+          surname?: string | null
+          updated_at?: string | null
+          username?: string | null
+          website?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "profiles_id_fkey"
+            columns: ["id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
       }
     }
     Views: {

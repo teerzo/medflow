@@ -7,15 +7,27 @@ import { redirect } from "next/navigation";
 // import Characters from './characters';
 
 import Link from 'next/link'
+import List from './list';
+
+import useForms from '../hooks/useForms';
+
+type Form = Database['public']['Tables']['forms']['Row']
 
 
 export default async function Page() {
     const supabase = createServerComponentClient<Database>({ cookies });
     const { data: { session } } = await supabase.auth.getSession();
-    const user = session?.user;
+
+    // const id = session?.user?.id;
+    // console.log('useProfile', id);
+    // const forms = await useForms()
+    // console.log('forms', forms);
+
 
     if (!session) {
         redirect("/login");
+    }
+    else {
 
     }
 
@@ -32,44 +44,9 @@ export default async function Page() {
 
             <div className="items-center pt-20">
                 <div className="bg-base-100 overflow-x-auto p-5">
-                    <table className="table">
-                        {/* head */}
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Patient</th>
-                                <th>Physician</th>
-                                <th>Form Type</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {/* row 1 */}
-                            <tr className="hover">
-                                <th>1</th>
-                                <td>Cy Ganderton</td>
-                                <td> {user?.email} </td>
-                                <td>Form A</td>
-                            </tr>
-                            {/* row 2 */}
-                            <tr className="hover">
-                                <th>2</th>
-                                <td>Hart Hagerty</td>
-                                <td> {user?.email} </td>
-                                <td>Form D</td>
-                            </tr>
-                            {/* row 3 */}
-                            <tr className="hover">
-                                <th>3</th>
-                                <td>Brice Swyre</td>
-                                <td> {user?.email} </td>
-                                <td>Form B</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <List />
                 </div>
             </div>
-
-            {/* <Characters /> */}
         </main>
     )
 }
