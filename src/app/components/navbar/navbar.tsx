@@ -20,14 +20,13 @@ export default function Navbar() {
                         </div>
                     </label>
                     <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-                        <li>
+                        <li  className="opacity-25">
                             <a className="justify-between">
                                 Profile
-                                <span className="badge">New</span>
                             </a>
                         </li>
-                        <li><a>Settings</a></li>
-                        <li><a>Logout</a></li>
+                        <li className="opacity-25"><a>Settings</a></li>
+                        <li><Link href="/logout"> Logout </Link></li>
                     </ul>
                 </div>
 
