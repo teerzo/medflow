@@ -8,7 +8,7 @@ type Profile = Database['public']['Tables']['profiles']['Row']
 
 
 
-export default function Form({ session, profile }: { session: Session | null, profile: Profile }) {
+export default function Form({ session, profile }: { session: Session | null, profile: Profile | null }) {
 
     const supabase = createClientComponentClient<Database>()
     const [loading, setLoading] = useState(true)
@@ -16,9 +16,9 @@ export default function Form({ session, profile }: { session: Session | null, pr
     // Form data
     const [patient_given_name, setPatientGivenName] = useState<string | null>(null)
     const [patient_surname, setPatientSurname] = useState<string | null>(null)
-    const [physician_given_name, setPhysicianGivenName] = useState<string | null>(profile?.given_name)
-    const [physician_surname, setPhysicianSurname] = useState<string | null>(profile?.surname)
-    const [physician_mobile, setPhysicianMobile] = useState<string | null>(profile?.mobile)
+    const [physician_given_name, setPhysicianGivenName] = useState<string | null>(profile?.given_name ? profile.given_name : null)
+    const [physician_surname, setPhysicianSurname] = useState<string | null>(profile?.surname ? profile.surname : null)
+    const [physician_mobile, setPhysicianMobile] = useState<string | null>(profile?.mobile ? profile.mobile : null)
     const [form_type, setFormType] = useState<string | null>('-1');
 
     useEffect(() => {
@@ -170,11 +170,6 @@ export default function Form({ session, profile }: { session: Session | null, pr
                         {loading ? 'Loading ...' : 'Submit'}
                     </button>
                 </div>
-
-                <p> Form: </p>
-
-                <p> patient: {patient_given_name} - {patient_surname} </p>
-                <p> type: {form_type} </p>
             </form>
         </>
 
